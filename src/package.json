@@ -1,0 +1,12 @@
+{
+  "name": "tick",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "keywords": [
+    "electron",
+    "tick"
+  ],
+  "author": "zhaopeng",
+  "license": "MIT"
+}
