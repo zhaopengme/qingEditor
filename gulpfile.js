@@ -16,9 +16,15 @@ gulp.task('dist', ['clean-dist'], function(cb) {
     var packageJson = require('./package.json');
     var version = packageJson.devDependencies['electron-prebuilt'].match(semverRegex())[0];
 
+//    packager({
+//        arch: 'x64',
+//        platform: 'darwin',
+//        dir: '.',
+//        out: 'dist'
+//    }, cb);
     packager({
         arch: 'x64',
-        platform: 'darwin',
+        platform: 'win32',
         dir: '.',
         out: 'dist'
     }, cb);
