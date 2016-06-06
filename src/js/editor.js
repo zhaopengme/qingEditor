@@ -14,9 +14,12 @@ module.exports = function() {
     var fileEntry = null;
     var hasWriteAccess = false;
     var config = new Config();
+    var self = this;
+
     this.init = function() {
         this._initEditor();
     };
+
     /**
      * 初始化编辑器 for _initEditor
      * @private
@@ -24,7 +27,6 @@ module.exports = function() {
      * @return {Object} description
      */
     this._initEditor = function() {
-        var self = this;
         mdEditor = window.editormd("editormd", {
             width: "100%",
             height: "600",
@@ -39,7 +41,7 @@ module.exports = function() {
                     self.triggerClick('#openFile');
                 },
                 new: function(cm, icon, cursor, selection) {
-                	remote.getCurrentWindow().reload();
+                    remote.getCurrentWindow().reload();
                 },
                 save: function(cm, icon, cursor, selection) {
                     if (self.fileEntry && self.hasWriteAccess) {
@@ -112,7 +114,6 @@ module.exports = function() {
      */
     this._configUploadImage = function() {
 
-        var self = this;
         setTimeout(function() {
             mdEditor.fullscreen();
             mdEditor.toolbarHandlers.image = function() {
@@ -166,12 +167,67 @@ module.exports = function() {
         $('#openFile').off('click').on('click', $.proxy(this.openFile, this));
         $('#saveFile').off('click').on('click', $.proxy(this.saveFile, this));
         $(window).on('resize', $.proxy(this.resizeEditor, this));
+        $(document).on('paste', $.proxy(this.paste, this));
     };
 
 
     this.resizeEditor = function() {
         mdEditor.fullscreen();
         mdEditor.fullscreen();
+    }
+
+
+    this.paste = function(e) {
+
+        console.log(e)
+        var clipboard = e.originalEvent.clipboardData;
+        if (!clipboard.items || !clipboard.items.length) {
+            clear();
+            return;
+        }
+        var temp;
+        if ((temp = clipboard.items[0]) && temp.kind === 'file' && temp.type.indexOf('image') === 0) {
+            var imgFile = temp.getAsFile();
+            var key = moment().format('YYYY/MM/DD/') + util.guid() + '.png';
+            var token = util.getQiniuToken(config.readConfig());
+            self.qiniuUpload(imgFile, token, key, function(result) {
+                console.info(result)
+            });
+
+
+        } else if (temp = clipboard.getData('text/plain')) {
+
+        }
+    }
+
+    //上传图片,参数为:图片2进制内容,七牛token,文件名,回调函数
+    this.qiniuUpload = function(f, token, key, fn) {
+        var xhr = new XMLHttpRequest();
+        //创建表单
+        xhr.open('POST', 'http://up.qiniu.com', true);
+        var formData, startDate;
+        formData = new FormData();
+        if (key !== null && key !== undefined) formData.append('key', key);
+        formData.append('token', token);
+        formData.append('file', f);
+        var taking;
+
+        xhr.onreadystatechange = function(response) {
+            //上传成功则执行回调
+            if (xhr.readyState == 4 && xhr.status == 200 && xhr.responseText) {
+                var blkRet = JSON.parse(xhr.responseText);
+                fn(blkRet);
+            } else if (xhr.status != 200 && xhr.responseText) {
+                if (xhr.status == 631) {
+                    util.msg('七牛空间不存在!');
+                } else {
+                    util.msg('七牛设置错误!');
+                }
+            }
+        };
+        startDate = new Date().getTime();
+        //提交数据
+        xhr.send(formData);
     }
 
     /**
