@@ -168,6 +168,44 @@ module.exports = function() {
         $('#saveFile').off('click').on('click', $.proxy(this.saveFile, this));
         $(window).on('resize', $.proxy(this.resizeEditor, this));
         $(document).on('paste', $.proxy(this.paste, this));
+
+
+        $(document).on({
+            dragleave: function(e) { //拖离
+                e.preventDefault();
+                console.log('dragleave');
+            },
+            drop: function(e) { //拖后放
+                e.preventDefault();
+                console.log('drop');
+                var file = e.originalEvent.dataTransfer.files[0].path;
+                var fileName = util.getFileName(file);
+                var fileSuffix = util.getFileSuffix(file);
+                var key = moment().format('YYYY/MM/DD/') + util.guid() + fileSuffix;
+                var params = {
+                    key: key,
+                    filePath: file,
+                }
+                var option = config.readConfig();
+                util.uploadFile(option, params, function(url) {
+                    self.insertImageMd(url, fileName, '');
+                });
+
+
+
+            },
+            dragenter: function(e) { //拖进
+                e.preventDefault();
+                console.log('dragenter');
+
+            },
+            dragover: function(e) { //拖来拖去
+                e.preventDefault();
+                console.log('dragover');
+
+            }
+        });
+
     };
 
 
@@ -186,7 +224,7 @@ module.exports = function() {
             return;
         }
         var temp;
-        if ((temp = clipboard.items[0]) && temp.kind === 'file' && temp.type.indexOf('image') === 0) {
+        if ((temp = clipboard.items[clipboard.items.length-1]) && temp.kind === 'file' && temp.type.indexOf('image') === 0) {
             var imgFile = temp.getAsFile();
             var key = moment().format('YYYY/MM/DD/') + util.guid() + '.png';
             var options = config.readConfig();
