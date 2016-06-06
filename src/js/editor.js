@@ -189,9 +189,12 @@ module.exports = function() {
         if ((temp = clipboard.items[0]) && temp.kind === 'file' && temp.type.indexOf('image') === 0) {
             var imgFile = temp.getAsFile();
             var key = moment().format('YYYY/MM/DD/') + util.guid() + '.png';
-            var token = util.getQiniuToken(config.readConfig());
+            var options = config.readConfig();
+            var token = util.getQiniuToken(options);
             self.qiniuUpload(imgFile, token, key, function(result) {
-                console.info(result)
+                console.log(result);
+                var url = options.QINIU_URL + result.key;
+                self.insertImageMd(url, '', '');
             });
 
 
@@ -247,7 +250,8 @@ module.exports = function() {
             key: key,
             filePath: file,
         }
-        util.uploadFile(config.readConfig(), params, function(url) {
+        var option = config.readConfig();
+        util.uploadFile(option, params, function(url) {
             if (_.isObject(url)) {
                 $('input[data-url]').val(url.error);
             } else {
