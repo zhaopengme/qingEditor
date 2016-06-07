@@ -29,6 +29,7 @@ gulp.task('dist', ['clean-dist'], function(cb) {
         arch: 'x64',
         platform: 'linux',
         dir: '.',
+        asar:true,
         out: 'dist'
     }, cb);
 
