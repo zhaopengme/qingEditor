@@ -14,8 +14,8 @@ function walk(rootPath) {
         var dirNameArr = rootPath.split(path.sep);
         node.text = dirNameArr[dirNameArr.length - 1];
         node.href = rootPath;
-        if(node.text){
-
+        if (node.text == 'dist' || node.text == 'node_modules' || node.text == '.git' || node.text == '.idea' || node.text == '.gitignore') {
+            return null;
         }
     } else {
         throw new Error(rootPath + ' is a file!!!!');
@@ -45,7 +45,9 @@ function walk(rootPath) {
             }
             dirs.push(dir);
             var dirNode = walk(filePath);
-            dir.node = dirNode;
+            if (dirNode) {
+                dir.node = dirNode;
+            }
         }
     });
 
@@ -69,4 +71,4 @@ function walk(rootPath) {
 }
 
 var json = walk('./');
-console.log(json);
+console.log(JSON.stringify(json));
