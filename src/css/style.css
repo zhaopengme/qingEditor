@@ -1,3 +1,46 @@
-.editormd-form label{
-	width: 125px;
+.editormd-form label {
+    width: 125px;
+}
+
+
+/**
+* 布局css
+*/
+
+.common-layout {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+}
+
+#left-warp {
+    position: absolute;
+    top: 0;
+}
+
+.m-left {
+    left: 0;
+    width: 260px;
+}
+
+#center-warp {
+    position: absolute;
+    top: 0;
+}
+
+.m-center {
+    left: 260px;
+    right: 65%;
+}
+
+#right-warp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65%;
 }

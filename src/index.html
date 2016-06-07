@@ -1,25 +1,223 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8" />
-    <title>qingEditer</title>
-    <link rel="stylesheet" href="./verdor/editor/css/editormd.min.css" />
-    <link rel="stylesheet" href="./verdor/layer/skin/layer.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="verdor/bootstrap-treeview/bootstrap-treeview.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" media="screen" title="no title" charset="utf-8">
 </head>
 
 <body>
-
-    <div id="editormd"> </div>
-    <input style="display:none;" id="openFile" type="text" />
-    <input style="display:none;" id="saveFile" type="text" nwsaveas="default.md" />
+    <div id="warp-main" class="common-layout">
+        <div id="left-warp" class="common-layout m-left">
+            <div id="treeview1" class=""></div>
+        </div>
+        <div id="center-warp" class="common-layout m-center">center</div>
+        <div id="right-warp" class="common-layout m-right">
+            <webview src="./main.html" style="height: 100%" nodeintegration="true"></webview>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript">
     window.$ = window.jQuery = require(__dirname + '/verdor/jquery.min.js');
     </script>
-    <script src="./verdor/editor/editormd.min.js"></script>
-    <script src="./verdor/layer/layer.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="./verdor/bootstrap.js"></script>
+    <script src="./verdor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script type="text/javascript">
+    var defaultData = [{
+        text: 'Parent 1',
+        href: '#parent1',
+        tags: ['4'],
+        nodes: [{
+            text: 'Child 1',
+            href: '#child1',
+            tags: ['2'],
+            nodes: [{
+                text: 'Grandchild 1',
+                href: '#grandchild1',
+                tags: ['0']
+            }, {
+                text: 'Grandchild 2',
+                href: '#grandchild2',
+                tags: ['0']
+            }]
+        }, {
+            text: 'Child 2',
+            href: '#child2',
+            tags: ['0']
+        }]
+    }, {
+        text: 'Parent 2',
+        href: '#parent2',
+        tags: ['0']
+    }, {
+        text: 'Parent 3',
+        href: '#parent3',
+        tags: ['0']
+    }, {
+        text: 'Parent 4',
+        href: '#parent4',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }, {
+        text: 'Parent 5',
+        href: '#parent5',
+        tags: ['0']
+    }];
+
+    $('#treeview1').treeview({
+        data: defaultData
+    });
+    </script>
 </body>
 
 </html>
