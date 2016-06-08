@@ -21,6 +21,15 @@
 #left-warp {
     position: absolute;
     top: 0;
+    border-right: 1px solid #ccc;
+    overflow: auto;
+}
+
+
+#left-warp .left-header {
+    padding:10px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
 }
 
 .m-left {

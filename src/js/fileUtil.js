@@ -2,10 +2,10 @@ var fs = require('fs'),
     util = require('util');
 var path = require('path');
 var ignores = ['dist', 'node_modules', 'dist', '.git', '.idea', '.gitignore'];
-var defaultData = {};
 
-function walk(rootPath) {
 
+exports.walk = function (rootPath) {
+    var self = this;
     var dirs = [];
     var files = [];
     var node = {};
@@ -38,23 +38,24 @@ function walk(rootPath) {
         var filePath = rootPath + path.sep + item;
         if (fs.statSync(filePath).isDirectory()) {
             var dir = {
-                // dirName: item,
-                // dirPath: filePath,
+                dirName: item,
+                dirPath: filePath,
                 text: item,
                 href: filePath
             }
             dirs.push(dir);
-            var dirNode = walk(filePath);
+            var dirNode = self.walk(filePath);
             if (dirNode) {
                 dir.nodes = dirNode.nodes;
+                dir.files = dirNode.files;
+
             }
         }
     });
 
 
     node.nodes = dirs;
+    node.tags = [files.length];
+    node.files = files;
     return node;
 }
-
-var json = walk('./');
-console.log(JSON.stringify(json));

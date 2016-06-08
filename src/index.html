@@ -16,208 +16,47 @@
 </head>
 
 <body>
-    <div id="warp-main" class="common-layout">
-        <div id="left-warp" class="common-layout m-left">
-            <div id="treeview1" class=""></div>
+<div id="warp-main" class="common-layout">
+    <div id="left-warp" class="common-layout m-left">
+        <div class="left-header">
+            <label>文件夹</label>
         </div>
-        <div id="center-warp" class="common-layout m-center">center</div>
-        <div id="right-warp" class="common-layout m-right">
-            <webview src="./main.html" style="height: 100%" nodeintegration="true"></webview>
-        </div>
+        <div id="left-tree" class=""></div>
     </div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript">
-    window.$ = window.jQuery = require(__dirname + '/verdor/jquery.min.js');
-    </script>
-    <script src="./verdor/bootstrap.js"></script>
-    <script src="./verdor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
-    <script type="text/javascript">
-    var defaultData = [{
-        text: 'Parent 1',
-        href: '#parent1',
-        tags: ['4'],
-        nodes: [{
-            text: 'Child 1',
-            href: '#child1',
-            tags: ['2'],
-            nodes: [{
-                text: 'Grandchild 1',
-                href: '#grandchild1',
-                tags: ['0']
-            }, {
-                text: 'Grandchild 2',
-                href: '#grandchild2',
-                tags: ['0']
-            }]
-        }, {
-            text: 'Child 2',
-            href: '#child2',
-            tags: ['0']
-        }]
-    }, {
-        text: 'Parent 2',
-        href: '#parent2',
-        tags: ['0']
-    }, {
-        text: 'Parent 3',
-        href: '#parent3',
-        tags: ['0']
-    }, {
-        text: 'Parent 4',
-        href: '#parent4',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }, {
-        text: 'Parent 5',
-        href: '#parent5',
-        tags: ['0']
-    }];
+    <div id="center-warp" class="common-layout m-center">
+        <ul class="list-group bmd-list-group-sm">
 
-    $('#treeview1').treeview({
-        data: defaultData
+        </ul>
+    </div>
+    <div id="right-warp" class="common-layout m-right">
+        <webview id="main-webview" src="./main.html" style="height: 100%" nodeintegration preload="./js/test.js"></webview>
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript">
+    window.$ = window.jQuery = require(__dirname + '/verdor/jquery.min.js');
+</script>
+<script src="./verdor/bootstrap.js"></script>
+<script src="./verdor/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+<script src="./js/note.js"></script>
+<script>
+    var mainView = document.getElementById('main-webview');
+
+
+    window.mainView=mainView;
+    mainView.addEventListener('console-message', function (e) {
+        console.log(arguments);
+        var srcFile = e.sourceId.replace(/^.*[\\\/]/, '');
+        console.log('webview logged from ' + srcFile + '(' + e.line + '): ' + JSON.stringify(e.message));
     });
-    </script>
+    mainView.addEventListener('ipc-message', function (e) {
+        console.log('444444444444444444');
+        var srcFile = e.sourceId.replace(/^.*[\\\/]/, '');
+        console.log('webview logged from ' + srcFile + '(' + e.line + '): ' + e.message);
+    });
+</script>
 </body>
 
 </html>
