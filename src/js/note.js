@@ -8,6 +8,9 @@
 'use strict';
 
 var fileUtil = require('./js/fileUtil')
+var util = require('./js/util')
+var fsutils = require('fs-utils');
+
 var electron = require('electron');
 var ipc = electron.ipcRenderer;
 var Note = function () {
@@ -26,14 +29,42 @@ var Note = function () {
     this.events = function () {
         $('#left-tree').off('nodeSelected').on('nodeSelected', $.proxy(self.nodeSelected, self));
         $('#center-warp').off('click', 'a.list-group-item').on('click', 'a.list-group-item', $.proxy(self.fileSelected, self));
+
+
+        $(document).on({
+            dragleave: function (e) { //拖离
+                e.preventDefault();
+                console.log('dragleave');
+            },
+            drop: function (e) { //拖后放
+                e.preventDefault();
+                console.log('drop');
+                var file = e.originalEvent.dataTransfer.files[0].path;
+                if (fsutils.isDir(file)) {
+                    self.renderLeftTree(file)
+                }
+            },
+            dragenter: function (e) { //拖进
+                e.preventDefault();
+                console.log('dragenter');
+
+            },
+            dragover: function (e) { //拖来拖去
+                e.preventDefault();
+                console.log('dragover');
+
+            }
+        });
     }
 
-    this.renderLeftTree = function () {
-        var tree = fileUtil.walk('./');
+    this.renderLeftTree = function (rootPath) {
+        var tree = fileUtil.walk(rootPath || './');
         $('#left-tree').treeview({
             data: [tree],
             showBorder: false
         });
+        $('#left-tree').off('nodeSelected').on('nodeSelected', $.proxy(self.nodeSelected, self));
+        $('#center-warp').off('click', 'a.list-group-item').on('click', 'a.list-group-item', $.proxy(self.fileSelected, self));
     }
 
     this.renderCenterList = function (files) {

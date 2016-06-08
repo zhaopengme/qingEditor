@@ -29,7 +29,8 @@
         </ul>
     </div>
     <div id="right-warp" class="common-layout m-right">
-        <webview id="main-webview" src="./main.html" style="height: 100%" nodeintegration preload="./js/test.js"></webview>
+        <webview id="main-webview" src="./main.html" style="height: 100%" nodeintegration
+                 preload="./js/test.js"></webview>
     </div>
 </div>
 <!-- Bootstrap core JavaScript
@@ -45,7 +46,7 @@
     var mainView = document.getElementById('main-webview');
 
 
-    window.mainView=mainView;
+    window.mainView = mainView;
     mainView.addEventListener('console-message', function (e) {
         console.log(arguments);
         var srcFile = e.sourceId.replace(/^.*[\\\/]/, '');
@@ -56,6 +57,11 @@
         var srcFile = e.sourceId.replace(/^.*[\\\/]/, '');
         console.log('webview logged from ' + srcFile + '(' + e.line + '): ' + e.message);
     });
+
+
+
+
+
 </script>
 </body>
 
